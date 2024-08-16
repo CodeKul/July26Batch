@@ -1,5 +1,6 @@
 package com.codekul.july26batch.globalexception;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,12 +28,22 @@ public class ConstraintViolationExceptionHandler extends ResponseEntityException
         Set<ConstraintViolation<?>> set = ex.getConstraintViolations();
         Set<String> set1 = new HashSet<>();
 
-        set.forEach(s->{
+        set.forEach(s -> {
             set1.add(s.getMessage());
-            System.out.println("===============>"+set);
+            System.out.println("===============>" + set);
         });
         return new ResponseEntity<>(set1, BAD_REQUEST);
 //        System.out.println(set);
     }
+
+//    @ExceptionHandler(PSQLException.class)
+//    public ResponseEntity<?> PLSqlException(PSQLException ex) {
+//        SQLException set = ex.getNextException();
+//        System.out.println("================>"+set);
+//        return new ResponseEntity<>(set, BAD_REQUEST);
+////        System.out.println(set);
+//    }
+//
+
 
 }

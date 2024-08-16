@@ -1,24 +1,29 @@
 package com.codekul.july26batch.registration.controller;
 
 
+import com.codekul.july26batch.registration.dto.RegistrationRequestDto;
 import com.codekul.july26batch.registration.entity.Registration;
+import com.codekul.july26batch.registration.entity.RegistrationDetails;
 import com.codekul.july26batch.registration.repository.RegistrationRepo;
+import com.codekul.july26batch.registration.service.RegistrationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("registration")
 public class RegistrationController {
 
     @Autowired
-    private RegistrationRepo registrationRepo;
+    private RegistrationService registrationService;
 
     @PostMapping("save")
-    private String saveReg(@RequestBody Registration registration){
-        registrationRepo.save(registration);
-        return "reg saved";
+    public String saveReg(@RequestBody RegistrationRequestDto registration) {
+        return registrationService.saveRegistration(registration);
+    }
+
+    @GetMapping("getByName/{mobileNumber}")
+    public Registration getByName(@PathVariable Long mobileNumber) {
+        return registrationService.getByMobileNumber(mobileNumber);
     }
 }
