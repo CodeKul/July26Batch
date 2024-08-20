@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class July26batchApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		ConfigurableApplicationContext context = SpringApplication.run(July26batchApplication.class, args);
 //		Vodafone vodafone = context.getBean(Vodafone.class);
 //		vodafone.calling();
